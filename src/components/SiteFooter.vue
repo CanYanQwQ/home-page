@@ -73,9 +73,7 @@ const year = computed(() => new Date().getFullYear())
 
 @media (min-width: 640px) {
   .footer-inner {
-    flex-direction: row;
-    justify-content: space-between;
-    text-align: left;
+    text-align: center;
   }
 }
 </style>

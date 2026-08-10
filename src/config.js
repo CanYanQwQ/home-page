@@ -42,11 +42,6 @@ export const siteConfig = {
     { name: '数据可视化', url: 'https://github.com/your-username' },
   ],
 
-  // 备案号
-  beian: {
-    moe: {
-      text: '萌ICP备20260457号',
-      url: 'https://icp.gov.moe/?keyword=20260457',
-    },
-  },
+  // 备案号（可选，留空则不显示）
+  beian: null,
 }
