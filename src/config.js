@@ -45,8 +45,8 @@ export const siteConfig = {
   // 备案号
   beian: {
     moe: {
-      text: '萌ICP备20260682号',
-      url: 'https://icp.gov.moe/?keyword=20260682',
+      text: '萌ICP备20260457号',
+      url: 'https://icp.gov.moe/?keyword=20260457',
     },
   },
 }
