@@ -42,7 +42,7 @@ defineProps({
   border-color: var(--color-accent);
   background: var(--color-card-hover);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm), 0 0 0 1px var(--color-accent);
 }
 
 .project-name {

@@ -12,6 +12,20 @@ export const siteConfig = {
   // 头像：支持 URL 图片路径，或留空使用默认生成的头像（首字母 SVG）
   avatar: 'https://upload.wikimedia.org/wikipedia/en/b/b2/Hu_Tao_%28Genshin_Impact%29.png',
 
+  // ---------- SEO 配置（由 vite 插件自动注入 index.html） ----------
+  // 部署后的站点地址（用于 canonical / Open Graph / 结构化数据）
+  siteUrl: 'https://example.com/',
+  seo: {
+    // 页面描述（用于搜索引擎摘要与社交分享）
+    description: '残颜的个人主页 —— 全栈开发者，专注 Web 开发与用户体验设计。查看项目作品，关注 GitHub / 哔哩哔哩。',
+    // 关键词（对 SEO 影响有限，供参考）
+    keywords: '残颜,个人主页,全栈开发者,Web开发,前端,Vue,个人博客',
+    // 社交分享封面图：放 public/og-image.png，或改为绝对 URL
+    image: '/og-image.png',
+  },
+  // 页面引言
+  quote: '「UI参考了二叉树，整个网站使用 DeepSeek 编写，部署在 Cloudflare Worker 上。」',
+
   // 社交链接
   links: [
     {

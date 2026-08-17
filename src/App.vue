@@ -58,7 +58,7 @@
       </section>
 
       <!-- 项目区域 -->
-      <section class="projects-section" ref="projectsRef">
+      <section class="projects-section" id="projects" ref="projectsRef">
         <div class="container">
           <h2 class="section-label">项目</h2>
           <div class="projects-grid">
@@ -74,14 +74,12 @@
       <!-- 引言文字 -->
       <section class="quote-section">
         <div class="container">
-          <blockquote class="quote-text">
-            「UI参考了二叉树树，但是网站是使用DeepSeek写的，使用CloudFlare Worker部署。」
-          </blockquote>
+          <blockquote class="quote-text">{{ config.quote }}</blockquote>
         </div>
       </section>
 
       <!-- 社交区 -->
-      <section class="contact-section">
+      <section class="contact-section" id="contact">
         <div class="container">
           <h2 class="section-label">关注 &amp; 联系</h2>
           <p class="contact-desc">在这些平台上找到我</p>
@@ -128,6 +126,8 @@ const navItems = [
 const theme = ref('light')
 
 function getPreferredTheme() {
+  const htmlTheme = document.documentElement.dataset.theme
+  if (htmlTheme === 'dark' || htmlTheme === 'light') return htmlTheme
   if (localStorage.getItem('theme')) return localStorage.getItem('theme')
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
@@ -295,6 +295,7 @@ onMounted(() => {
   letter-spacing: -0.02em;
   color: var(--color-foreground);
   margin-bottom: var(--space-2);
+  text-wrap: balance;
   animation: fade-in-up 0.8s ease-out 0.2s both;
 }
 
@@ -303,6 +304,7 @@ onMounted(() => {
   font-weight: 500;
   color: var(--color-accent);
   margin-bottom: var(--space-3);
+  letter-spacing: 0.04em;
   animation: fade-in-up 0.8s ease-out 0.3s both;
 }
 
@@ -411,7 +413,7 @@ onMounted(() => {
   border-color: var(--link-color);
   background: color-mix(in srgb, var(--link-color) 8%, var(--color-card));
   transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm), 0 0 0 1px color-mix(in srgb, var(--link-color) 15%, transparent);
 }
 
 /* ============ 通用 ============ */

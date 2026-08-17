@@ -53,11 +53,11 @@
   --space-24: 6rem;
 
   /* 圆角 */
-  --radius-sm: 0;
-  --radius-md: 0;
-  --radius-lg: 0;
-  --radius-xl: 0;
-  --radius-full: 0;
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-full: 999px;
 
   /* 阴影 */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -143,6 +143,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header-height);
   -webkit-text-size-adjust: 100%;
 }
 
@@ -175,6 +176,18 @@ button {
   cursor: pointer;
   border: none;
   background: none;
+}
+
+/* 文本选中：跟随红色主题点缀 */
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* 键盘导航焦点样式 */
+:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
 }
 
 /* ---------- 工具类 ---------- */
