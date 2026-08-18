@@ -119,7 +119,7 @@ import SiteFooter from './components/SiteFooter.vue'
 const navItems = [
   { label: '项目', href: '#projects' },
   { label: '联系', href: '#contact' },
-  { label: 'GitHub', href: 'https://github.com/your-username' },
+  { label: 'GitHub', href: 'https://github.com/CanYanQwQ' },
 ]
 
 // ---------- 主题 ----------

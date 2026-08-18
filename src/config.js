@@ -17,7 +17,7 @@ export const siteConfig = {
   siteUrl: 'https://example.com/',
   seo: {
     // 页面描述（用于搜索引擎摘要与社交分享）
-    description: '残颜的个人主页 —— 全栈开发者，专注 Web 开发与用户体验设计。查看项目作品，关注 GitHub / 哔哩哔哩。',
+    description: '残颜的个人主页 —— 全栈开发者，专注 Web 开发与用户体验设计。查看博客文章，关注 GitHub / 哔哩哔哩。',
     // 关键词（对 SEO 影响有限，供参考）
     keywords: '残颜,个人主页,全栈开发者,Web开发,前端,Vue,个人博客',
     // 社交分享封面图：放 public/og-image.png，或改为绝对 URL
@@ -31,29 +31,26 @@ export const siteConfig = {
     {
       label: 'GitHub',
       icon: 'github',
-      url: 'https://github.com/your-username',
+      url: 'https://github.com/CanYanQwQ',
       color: '#18181B',
     },
     {
       label: '哔哩哔哩',
       icon: 'bilibili',
-      url: 'https://space.bilibili.com/your-id',
+      url: 'https://space.bilibili.com/3546714340330136',
       color: '#FB7299',
     },
     {
       label: '邮箱',
       icon: 'mail',
-      url: 'mailto:hello@example.com',
+      url: 'mailto:canyan886@gmail.com',
       color: '#D97706',
     },
   ],
 
-  // 项目（下滑展示，一行3个，名称点击跳转）
+  // 项目（下滑展示，名称点击跳转）
   projects: [
-    { name: '个人主页', url: 'https://github.com/your-username' },
-    { name: '博客系统', url: 'https://your-blog.com' },
-    { name: '工具箱', url: 'https://github.com/your-username' },
-    { name: '数据可视化', url: 'https://github.com/your-username' },
+    { name: '博客', url: 'https://blog.zhouwanx.top' },
   ],
 
   // 备案号（可选，留空则不显示）
