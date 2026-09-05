@@ -1,67 +1,52 @@
 <template>
   <div class="app" :data-theme="theme" id="top">
-    <!-- 背景装饰 -->
-    <div class="bg-decoration" aria-hidden="true">
-      <div class="bg-blob bg-blob-1"></div>
-      <div class="bg-blob bg-blob-2"></div>
-      <div class="bg-dots"></div>
-    </div>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
 
-    <!-- 导航栏 -->
-    <SiteNav :name="config.name" :avatar="config.avatar" :nav-items="navItems" />
+    <SiteNav
+      :name="config.name"
+      :avatar="config.avatar"
+      :theme="theme"
+      @toggle-theme="toggleTheme"
+    />
 
-    <!-- 主题切换按钮 -->
-    <button
-      class="theme-toggle"
-      :aria-label="theme === 'dark' ? '切换到浅色模式' : '切换到深色模式'"
-      :title="theme === 'dark' ? '浅色模式' : '深色模式'"
-      @click="toggleTheme"
-    >
-      <AppIcon :name="theme === 'dark' ? 'sun' : 'moon'" :size="18" />
-    </button>
-
-    <!-- 主内容 -->
-    <main class="main">
-      <!-- Hero 区域 -->
-      <section class="hero" ref="heroRef">
-        <div class="container hero-inner">
-          <div class="hero-avatar">
+    <main id="main-content">
+      <section class="profile-section" aria-labelledby="profile-name">
+        <div class="container profile-layout">
+          <div class="profile-avatar">
             <AppAvatar
               :src="config.avatar"
               :name="config.name"
-              :size="isMobile ? 88 : 104"
+              :size="152"
+              shape="portrait"
             />
           </div>
 
-          <h1 class="hero-name">{{ config.name }}</h1>
-          <p class="hero-tagline">{{ config.title }}</p>
-          <p class="hero-bio">{{ config.bio }}</p>
-        </div>
+          <div class="profile-copy">
+            <h1 id="profile-name">{{ config.name }}</h1>
+            <p class="profile-role">{{ config.title }}</p>
+            <p class="profile-bio">{{ config.bio }}</p>
 
-        <!-- 下滑提示 -->
-        <div class="scroll-hint" aria-hidden="true">
-          <svg
-            class="scroll-hint-arrow"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
+            <nav class="social-links" aria-label="站外平台">
+              <a
+                v-for="link in config.links"
+                :key="link.label"
+                :href="link.url"
+                class="social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <AppIcon :name="link.icon" :size="18" />
+                <span>{{ link.label }}</span>
+              </a>
+            </nav>
+          </div>
         </div>
       </section>
 
-      <!-- 项目区域 -->
-      <section class="projects-section" id="projects" ref="projectsRef">
+      <section class="project-section" id="projects" aria-labelledby="projects-title">
         <div class="container">
-          <h2 class="section-label">项目</h2>
-          <div class="projects-grid">
+          <h2 id="projects-title">项目</h2>
+          <div class="project-grid">
             <ProjectCard
               v-for="project in config.projects"
               :key="project.name"
@@ -70,361 +55,224 @@
           </div>
         </div>
       </section>
-
-      <!-- 引言文字 -->
-      <section class="quote-section">
-        <div class="container">
-          <blockquote class="quote-text">{{ config.quote }}</blockquote>
-        </div>
-      </section>
-
-      <!-- 社交区 -->
-      <section class="contact-section" id="contact">
-        <div class="container">
-          <h2 class="section-label">关注 &amp; 联系</h2>
-          <p class="contact-desc">在这些平台上找到我</p>
-          <div class="contact-grid">
-            <a
-              v-for="link in config.links"
-              :key="link.label"
-              :href="link.url"
-              class="contact-btn"
-              :style="{ '--link-color': link.color }"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <AppIcon :name="link.icon" :size="20" />
-              <span>{{ link.label }}</span>
-            </a>
-          </div>
-        </div>
-      </section>
     </main>
 
-    <!-- 底部 -->
-    <SiteFooter :name="config.name" :beian="config.beian" />
+    <SiteFooter
+      :name="config.name"
+      :beian="config.beian"
+      :quote="config.quote"
+    />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import AppIcon from './components/AppIcon.vue'
-import { siteConfig as config } from './config.js'
+import { onMounted, ref } from 'vue'
 import AppAvatar from './components/AppAvatar.vue'
+import AppIcon from './components/AppIcon.vue'
 import ProjectCard from './components/ProjectCard.vue'
-import SiteNav from './components/SiteNav.vue'
 import SiteFooter from './components/SiteFooter.vue'
+import SiteNav from './components/SiteNav.vue'
+import { siteConfig as config } from './config.js'
 
-// 导航项目
-const navItems = [
-  { label: '项目', href: '#projects' },
-  { label: '联系', href: '#contact' },
-  { label: 'GitHub', href: 'https://github.com/CanYanQwQ' },
-]
-
-// ---------- 主题 ----------
 const theme = ref('light')
 
 function getPreferredTheme() {
   const htmlTheme = document.documentElement.dataset.theme
   if (htmlTheme === 'dark' || htmlTheme === 'light') return htmlTheme
-  if (localStorage.getItem('theme')) return localStorage.getItem('theme')
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
-function toggleTheme() {
-  theme.value = theme.value === 'dark' ? 'light' : 'dark'
-  localStorage.setItem('theme', theme.value)
+const themeColors = {
+  light: '#FFFFFF',
+  dark: '#0A0A0A',
 }
 
-onMounted(() => { theme.value = getPreferredTheme() })
+function applyTheme(nextTheme) {
+  theme.value = nextTheme
+  document.documentElement.dataset.theme = nextTheme
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', themeColors[nextTheme])
+}
 
-// ---------- 响应式 ----------
-const isMobile = ref(false)
-function checkMobile() { isMobile.value = window.innerWidth < 640 }
-onMounted(() => {
-  checkMobile()
-  window.addEventListener('resize', checkMobile)
-})
-onUnmounted(() => window.removeEventListener('resize', checkMobile))
+function toggleTheme() {
+  const nextTheme = theme.value === 'dark' ? 'light' : 'dark'
+  applyTheme(nextTheme)
+  localStorage.setItem('theme', nextTheme)
+}
 
-// ---------- 滚动动画 ----------
-const heroRef = ref(null)
-const projectsRef = ref(null)
-
-onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-          observer.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.15 }
-  )
-  if (heroRef.value) observer.observe(heroRef.value)
-  if (projectsRef.value) observer.observe(projectsRef.value)
-})
+onMounted(() => applyTheme(getPreferredTheme()))
 </script>
 
 <style scoped>
-/* ============ 布局 ============ */
 .app {
-  position: relative;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
   background: var(--color-background);
-  transition: background var(--transition-base);
+  color: var(--color-foreground);
+  transition: background-color var(--transition-base), color var(--transition-base);
 }
 
-.main {
+main {
   flex: 1;
-  padding: 0;
 }
 
-/* ============ 背景装饰 ============ */
-.bg-decoration {
+.skip-link {
   position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-.bg-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.15;
-  animation: float 20s ease-in-out infinite;
-}
-.bg-blob-1 {
-  width: 400px; height: 400px;
-  background: var(--color-accent);
-  top: -10%; right: -10%;
-  animation-delay: 0s;
-}
-.bg-blob-2 {
-  width: 300px; height: 300px;
-  background: var(--color-accent);
-  bottom: 10%; left: -8%;
-  animation-delay: -7s;
-  opacity: 0.08;
-}
-.bg-dots {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.4;
-}
-@media (prefers-color-scheme: dark) {
-  .bg-blob { opacity: 0.08; }
-  .bg-blob-1 { opacity: 0.06; }
-  .bg-blob-2 { opacity: 0.05; }
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 1000;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-foreground);
+  color: var(--color-background);
+  transform: translateY(-160%);
+  transition: transform var(--transition-fast);
 }
 
-/* ============ 主题切换按钮 ============ */
-.theme-toggle {
-  position: fixed;
-  top: calc(var(--header-height) + var(--space-2));
-  right: var(--space-4);
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-full);
-  background: var(--color-card);
-  border: 1px solid var(--color-border);
-  color: var(--color-foreground);
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-base);
-}
-.theme-toggle:hover {
-  background: var(--color-card-hover);
-  box-shadow: var(--shadow-md);
-  transform: rotate(12deg);
-}
-.theme-toggle:focus-visible {
-  outline: 2px solid var(--color-ring);
-  outline-offset: 2px;
-}
-@media (min-width: 768px) {
-  .theme-toggle { right: var(--space-6); }
-}
-
-/* ============ Hero 区域 ============ */
-.hero {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: 100dvh;
-  padding: var(--header-height) 0 var(--space-8);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-.hero.visible {
-  opacity: 1;
+.skip-link:focus {
   transform: translateY(0);
 }
 
-.hero-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
+.profile-section {
+  padding: calc(var(--header-height) + var(--space-16)) 0 var(--space-16);
 }
 
-.hero-avatar {
-  margin-bottom: var(--space-6);
-  animation: fade-in-up 0.8s ease-out 0.1s both;
-}
-
-.hero-name {
-  font-family: var(--font-heading);
-  font-size: var(--text-3xl);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--color-foreground);
-  margin-bottom: var(--space-2);
-  text-wrap: balance;
-  animation: fade-in-up 0.8s ease-out 0.2s both;
-}
-
-.hero-tagline {
-  font-size: var(--text-lg);
-  font-weight: 500;
-  color: var(--color-accent);
-  margin-bottom: var(--space-3);
-  letter-spacing: 0.04em;
-  animation: fade-in-up 0.8s ease-out 0.3s both;
-}
-
-.hero-bio {
-  font-size: var(--text-sm);
-  color: var(--color-muted-foreground);
-  max-width: 480px;
-  line-height: 1.7;
-  margin-bottom: 0;
-  animation: fade-in-up 0.8s ease-out 0.35s both;
-}
-
-/* 下滑提示 */
-.scroll-hint {
-  position: absolute;
-  bottom: var(--space-8);
-  left: 50%;
-  transform: translateX(-50%);
-  animation: fade-in-up 0.8s ease-out 0.7s both;
-}
-.scroll-hint-arrow {
-  display: block;
-  width: 20px;
-  height: 20px;
-  color: var(--color-muted-foreground);
-  animation: scroll-hint 2s ease-in-out infinite;
-}
-@keyframes scroll-hint {
-  0%, 100% { transform: translateY(-4px); opacity: 0.3; }
-  50% { transform: translateY(4px); opacity: 1; }
-}
-
-@media (min-width: 640px) {
-  .hero-name { font-size: var(--text-5xl); }
-  .hero-tagline { font-size: var(--text-xl); }
-  .hero-bio { font-size: var(--text-base); }
-}
-
-/* ============ 项目区域 ============ */
-.projects-section {
-  padding: var(--space-20) 0 var(--space-16);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out 0.2s, transform 0.6s ease-out 0.2s;
-}
-.projects-section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.projects-grid {
+.profile-layout {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-3);
-  justify-items: stretch;
-}
-@media (max-width: 639px) {
-  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 4.5rem);
+  max-width: 920px;
+  animation: profile-enter 360ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* ============ 引言文字 ============ */
-.quote-section {
-  padding: var(--space-8) 0 var(--space-8);
+.profile-avatar {
+  padding: var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: calc(var(--radius-xl) + var(--space-2));
+  background: var(--color-surface);
 }
-.quote-text {
-  text-align: center;
+
+.profile-copy h1 {
   font-family: var(--font-heading);
-  font-size: var(--text-sm);
-  line-height: 1.8;
-  color: var(--color-muted-foreground);
-  font-style: italic;
-  max-width: 480px;
-  margin: 0 auto;
+  font-size: clamp(3.75rem, 8vw, 5.5rem);
+  font-weight: 850;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
 }
 
-/* ============ 联系区域 ============ */
-.contact-section {
-  padding: var(--space-12) 0 var(--space-16);
+.profile-role {
+  width: fit-content;
+  margin-top: var(--space-4);
+  padding-bottom: 2px;
+  border-bottom: 2px solid var(--color-accent);
+  font-size: var(--text-lg);
+  font-weight: 700;
 }
-.contact-desc {
-  text-align: center;
-  font-size: var(--text-sm);
+
+.profile-bio {
+  max-width: 38rem;
+  margin-top: var(--space-4);
   color: var(--color-muted-foreground);
-  margin-bottom: var(--space-4);
+  font-size: var(--text-base);
+  line-height: 1.75;
 }
-.contact-grid {
+
+.social-links {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-3);
+  gap: var(--space-2);
+  margin-top: var(--space-6);
 }
-.contact-btn {
+
+.social-link {
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: var(--space-2) var(--space-8);
-  border-radius: var(--radius-full);
-  background: var(--color-card);
+  padding: var(--space-2) var(--space-4);
   border: 1px solid var(--color-border);
-  color: var(--color-foreground);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-muted-foreground);
   font-size: var(--text-sm);
-  font-weight: 500;
-  transition: all var(--transition-base);
-  min-height: 40px;
-}
-.contact-btn:hover {
-  border-color: var(--link-color);
-  background: color-mix(in srgb, var(--link-color) 8%, var(--color-card));
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm), 0 0 0 1px color-mix(in srgb, var(--link-color) 15%, transparent);
+  font-weight: 650;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
 }
 
-/* ============ 通用 ============ */
-.section-label {
+.social-link:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-surface-strong);
+  color: var(--color-foreground);
+}
+
+.project-section {
+  padding: var(--space-12) 0 var(--space-20);
+  border-top: 1px solid var(--color-border);
+}
+
+.project-section h2 {
+  margin-bottom: var(--space-6);
   font-family: var(--font-heading);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-muted-foreground);
-  text-align: center;
-  margin-bottom: var(--space-4);
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 780;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+@keyframes profile-enter {
+  from {
+    opacity: 0.65;
+    transform: translateY(10px);
+  }
+}
+
+@media (max-width: 860px) {
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 719px) {
+  .profile-section {
+    padding: calc(var(--header-height) + var(--space-10)) 0 var(--space-12);
+  }
+
+  .profile-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .profile-avatar {
+    width: fit-content;
+  }
+
+  .profile-copy h1 {
+    font-size: clamp(3.5rem, 18vw, 4.75rem);
+  }
+
+  .social-links {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .social-link {
+    justify-content: center;
+    padding-inline: var(--space-2);
+  }
+
+  .project-section {
+    padding: var(--space-10) 0 var(--space-16);
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

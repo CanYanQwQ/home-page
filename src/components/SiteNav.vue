@@ -1,71 +1,43 @@
 <template>
   <header class="site-nav">
-    <div class="nav-inner">
-      <!-- Logo / 名称 -->
-      <a href="#top" class="nav-logo">
+    <div class="container nav-inner">
+      <a href="#top" class="nav-logo" aria-label="返回页面顶部">
         <img
           v-if="avatar"
           :src="avatar"
-          :alt="name"
+          :alt="`${name} 的头像`"
           class="nav-logo-avatar"
+          width="36"
+          height="36"
         />
-        <span v-else class="nav-logo-mark">{{ initial }}</span>
+        <span v-else class="nav-logo-mark" aria-hidden="true">{{ initial }}</span>
+        <span class="nav-logo-name">{{ name }}</span>
       </a>
 
-      <!-- 导航链接 -->
-      <nav class="nav-links" aria-label="站点导航">
-        <a
-          v-for="item in navItems"
-          :key="item.label"
-          :href="item.href"
-          class="nav-link"
-        >
-          {{ item.label }}
-        </a>
-      </nav>
-
-      <!-- 移动端菜单按钮 -->
       <button
-        class="nav-toggle"
-        :aria-label="menuOpen ? '关闭菜单' : '打开菜单'"
-        :aria-expanded="menuOpen"
-        @click="menuOpen = !menuOpen"
+        class="theme-toggle"
+        :aria-label="theme === 'dark' ? '切换到浅色模式' : '切换到深色模式'"
+        :aria-pressed="theme === 'dark'"
+        :title="theme === 'dark' ? '浅色模式' : '深色模式'"
+        @click="$emit('toggle-theme')"
       >
-        <AppIcon :name="menuOpen ? 'x' : 'menu'" :size="22" />
+        <AppIcon :name="theme === 'dark' ? 'sun' : 'moon'" :size="19" />
       </button>
     </div>
-
-    <!-- 移动端下拉菜单 -->
-    <transition name="nav-drop">
-      <nav v-if="menuOpen" class="nav-mobile" aria-label="移动端导航">
-        <a
-          v-for="item in navItems"
-          :key="item.label"
-          :href="item.href"
-          class="nav-mobile-link"
-          @click="menuOpen = false"
-        >
-          {{ item.label }}
-        </a>
-      </nav>
-    </transition>
   </header>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import AppIcon from './AppIcon.vue'
 
 const props = defineProps({
   name: { type: String, default: '' },
   avatar: { type: String, default: '' },
-  navItems: {
-    type: Array,
-    default: () => [],
-  },
+  theme: { type: String, default: 'light' },
 })
 
-const menuOpen = ref(false)
+defineEmits(['toggle-theme'])
 
 const initial = computed(() => props.name.trim().charAt(0).toUpperCase() || '?')
 </script>
@@ -73,123 +45,70 @@ const initial = computed(() => props.name.trim().charAt(0).toUpperCase() || '?')
 <style scoped>
 .site-nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0 0 auto;
   z-index: 100;
-  background: color-mix(in srgb, var(--color-background) 80%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
+  background: var(--color-background);
+  transition: background-color var(--transition-base), border-color var(--transition-base);
 }
 
 .nav-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--space-6);
-  height: var(--header-height);
+  min-height: var(--header-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  color: var(--color-foreground);
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: var(--text-base);
-}
-
-.nav-logo-mark {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: var(--radius-md);
-  background: var(--color-accent);
-  color: var(--color-on-primary);
-  font-size: var(--text-sm);
-}
-
-.nav-logo-avatar {
-  width: 28px;
-  height: 28px;
-  display: block;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.nav-links {
-  display: none;
-  align-items: center;
   gap: var(--space-6);
 }
 
-.nav-link {
-  font-size: var(--text-sm);
-  color: var(--color-muted-foreground);
-  transition: color var(--transition-fast);
-  padding: var(--space-2) 0;
-}
-
-.nav-link:hover {
-  color: var(--color-foreground);
-}
-
-.nav-toggle {
-  display: flex;
+.nav-logo {
+  min-height: 44px;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-md);
+  gap: var(--space-3);
   color: var(--color-foreground);
-  background: transparent;
+  font-weight: 760;
+}
+
+.nav-logo-avatar,
+.nav-logo-mark {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: var(--radius-sm);
+}
+
+.nav-logo-avatar {
+  object-fit: cover;
+}
+
+.nav-logo-mark {
+  display: grid;
+  place-items: center;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.nav-logo-name {
+  letter-spacing: -0.02em;
+}
+
+.theme-toggle {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
   border: 1px solid var(--color-border);
-}
-
-.nav-mobile {
-  padding: var(--space-3) var(--space-6) var(--space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  background: var(--color-background);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.nav-mobile-link {
-  padding: var(--space-3) var(--space-2);
-  font-size: var(--text-base);
-  color: var(--color-foreground);
   border-radius: var(--radius-md);
-  transition: background var(--transition-fast);
+  background: var(--color-surface);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
 }
 
-.nav-mobile-link:hover {
-  background: var(--color-muted);
+.theme-toggle:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-surface-strong);
 }
 
-@media (min-width: 640px) {
-  .nav-links {
-    display: flex;
-  }
-  .nav-toggle {
-    display: none;
-  }
-}
-
-/* 移动端下拉动画 */
-.nav-drop-enter-active,
-.nav-drop-leave-active {
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-.nav-drop-enter-from,
-.nav-drop-leave-to {
-  opacity: 0;
-  transform: translateY(-8px);
+.theme-toggle:active {
+  transform: scale(0.96);
 }
 </style>

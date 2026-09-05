@@ -2,64 +2,98 @@
   <a
     class="project-card"
     :href="project.url"
+    :aria-label="`${project.name}（在新窗口打开）`"
     target="_blank"
     rel="noopener noreferrer"
   >
-    <span class="project-name">{{ project.name }}</span>
-    <AppIcon name="external-link" :size="14" class="project-arrow" />
+    <span class="project-copy">
+      <strong>{{ project.name }}</strong>
+      <small>{{ hostname }}</small>
+    </span>
+    <span class="project-icon">
+      <AppIcon name="external-link" :size="18" />
+    </span>
   </a>
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import AppIcon from './AppIcon.vue'
 
-defineProps({
+const props = defineProps({
   project: {
     type: Object,
     required: true,
   },
 })
+
+const hostname = computed(() => new URL(props.project.url).hostname)
 </script>
 
 <style scoped>
 .project-card {
+  min-width: 0;
+  min-height: 96px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  padding: var(--space-4) var(--space-4);
-  background: var(--color-card);
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
   color: var(--color-foreground);
-  text-align: center;
-  transition: all var(--transition-base);
-  min-height: 48px;
-  width: 100%;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
 }
 
 .project-card:hover {
   border-color: var(--color-accent);
-  background: var(--color-card-hover);
+  background: var(--color-surface-strong);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-sm), 0 0 0 1px var(--color-accent);
 }
 
-.project-name {
+.project-card:active {
+  transform: translateY(0);
+}
+
+.project-copy {
+  min-width: 0;
+  display: grid;
+  gap: var(--space-1);
+}
+
+.project-copy strong,
+.project-copy small {
+  overflow-wrap: anywhere;
+}
+
+.project-copy strong {
   font-family: var(--font-heading);
-  font-size: var(--text-sm);
-  font-weight: 500;
+  font-size: var(--text-lg);
+  font-weight: 750;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
 }
 
-.project-arrow {
+.project-copy small {
   color: var(--color-muted-foreground);
-  opacity: 0;
-  transition: opacity var(--transition-fast), transform var(--transition-fast);
-  flex-shrink: 0;
+  font-size: var(--text-xs);
 }
 
-.project-card:hover .project-arrow {
-  opacity: 0.6;
-  transform: translate(2px, -2px);
+.project-icon {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-strong);
+  color: var(--color-muted-foreground);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.project-card:hover .project-icon {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
 }
 </style>

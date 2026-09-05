@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-05",
+  "title": "Design System: 残颜",
+  "extensions": {
+    "colorMeta": {
+      "background": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#171717", "#353535", "#545454", "#737373", "#969696", "#b8b8b8", "#d9d9d9", "#ffffff"]
+      },
+      "foreground": {
+        "role": "neutral",
+        "displayName": "Carbon Black",
+        "canonical": "#171717",
+        "tonalRamp": ["#171717", "#303030", "#494949", "#626262", "#7b7b7b", "#989898", "#c7c7c7", "#fafafa"]
+      },
+      "muted-foreground": {
+        "role": "neutral",
+        "displayName": "Quiet Grey Copy",
+        "canonical": "#4a4a4a",
+        "tonalRamp": ["#1d1d1d", "#333333", "#4a4a4a", "#646464", "#828282", "#a1a1a1", "#c7c7c7", "#e8e8e8"]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Crisp Surface",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#171717", "#353535", "#545454", "#737373", "#969696", "#b8b8b8", "#d9d9d9", "#ffffff"]
+      },
+      "surface-strong": {
+        "role": "neutral",
+        "displayName": "Tonal Surface",
+        "canonical": "#f5f5f5",
+        "tonalRamp": ["#202020", "#3b3b3b", "#565656", "#737373", "#909090", "#b0b0b0", "#d2d2d2", "#f5f5f5"]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Fine Divider",
+        "canonical": "#d4d4d4",
+        "tonalRamp": ["#202020", "#3d3d3d", "#5a5a5a", "#777777", "#949494", "#b2b2b2", "#d4d4d4", "#f2f2f2"]
+      },
+      "border-strong": {
+        "role": "neutral",
+        "displayName": "Firm Divider",
+        "canonical": "#737373",
+        "tonalRamp": ["#202020", "#3b3b3b", "#555555", "#737373", "#929292", "#b2b2b2", "#d3d3d3", "#f2f2f2"]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Rare Amber",
+        "canonical": "#a85b00",
+        "tonalRamp": ["#2a1500", "#542c00", "#7a4200", "#a85b00", "#ca7a18", "#e5a34c", "#f3cc91", "#fff1d5"]
+      },
+      "accent-strong": {
+        "role": "primary",
+        "displayName": "Deep Amber",
+        "canonical": "#854800",
+        "tonalRamp": ["#211100", "#422300", "#633600", "#854800", "#aa6513", "#d08a39", "#efbb79", "#ffe8c1"]
+      },
+      "on-accent": {
+        "role": "neutral",
+        "displayName": "Action White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#171717", "#353535", "#545454", "#737373", "#969696", "#b8b8b8", "#d9d9d9", "#ffffff"]
+      },
+      "ring": {
+        "role": "neutral",
+        "displayName": "Carbon Focus Ring",
+        "canonical": "#171717",
+        "tonalRamp": ["#171717", "#303030", "#494949", "#626262", "#7b7b7b", "#989898", "#c7c7c7", "#fafafa"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Identity Display",
+        "purpose": "The owner's name only."
+      },
+      "headline": {
+        "displayName": "Section Headline",
+        "purpose": "Compact section heading hierarchy."
+      },
+      "title": {
+        "displayName": "Project Title",
+        "purpose": "A project destination name inside a compact card."
+      },
+      "body": {
+        "displayName": "Reading Body",
+        "purpose": "Default page copy, with the bio and quote using a more open line-height."
+      },
+      "label": {
+        "displayName": "Compact Label",
+        "purpose": "Social-link labels and utility text."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "fast",
+        "value": "180ms cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Direct hover and active feedback on controls, social links, and project cards."
+      },
+      {
+        "name": "base",
+        "value": "280ms cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Theme and fixed-header color transitions."
+      },
+      {
+        "name": "profile-enter",
+        "value": "360ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The sole one-time profile-layout entrance."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "project-grid-two-columns",
+        "value": "860px"
+      },
+      {
+        "name": "mobile-project-grid-and-social-row",
+        "value": "719px"
+      },
+      {
+        "name": "footer-meta-stack",
+        "value": "640px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Brand Header",
+      "kind": "nav",
+      "refersTo": "header-brand",
+      "description": "The fixed identity-and-theme header used at the top of the page.",
+      "html": "<header class=\"ds-site-header\"><a class=\"ds-brand\" href=\"#top\" aria-label=\"返回页面顶部\"><span class=\"ds-brand-mark\" aria-hidden=\"true\">残</span><span>残颜</span></a><button class=\"ds-theme-toggle\" type=\"button\" aria-label=\"切换主题\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41\"/></svg></button></header>",
+      "css": ".ds-site-header { min-height: 4.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0 1rem; border-bottom: 1px solid var(--color-border); background: var(--color-background); color: var(--color-foreground); font-family: var(--font-body); } .ds-brand { min-height: 44px; display: inline-flex; align-items: center; gap: 0.75rem; color: var(--color-foreground); font-size: 0.9rem; font-weight: 760; text-decoration: none; } .ds-brand-mark { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 6px; background: var(--color-accent); color: var(--color-on-accent); } .ds-theme-toggle { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); color: var(--color-foreground); transition: background-color 180ms cubic-bezier(0.22, 1, 0.36, 1), border-color 180ms cubic-bezier(0.22, 1, 0.36, 1), transform 180ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-theme-toggle svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; } .ds-theme-toggle:hover { border-color: var(--color-border-strong); background: var(--color-surface-strong); } .ds-theme-toggle:focus-visible, .ds-brand:focus-visible { outline: 3px solid var(--color-ring); outline-offset: 4px; } .ds-theme-toggle:active { transform: scale(0.96); }"
+    },
+    {
+      "name": "Theme Toggle",
+      "kind": "button",
+      "refersTo": "theme-toggle",
+      "description": "The 44px bordered utility control that switches the light and dark themes.",
+      "html": "<button class=\"ds-theme-control\" type=\"button\" aria-label=\"切换主题\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 3v2m0 14v2M3 12h2m14 0h2M5.64 5.64l1.41 1.41m9.9 9.9 1.41 1.41m0-12.72-1.41 1.41m-9.9 9.9-1.41 1.41\"/><circle cx=\"12\" cy=\"12\" r=\"4\"/></svg></button>",
+      "css": ".ds-theme-control { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); color: var(--color-foreground); transition: background-color 180ms cubic-bezier(0.22, 1, 0.36, 1), border-color 180ms cubic-bezier(0.22, 1, 0.36, 1), transform 180ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-theme-control svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; } .ds-theme-control:hover { border-color: var(--color-border-strong); background: var(--color-surface-strong); } .ds-theme-control:focus-visible { outline: 3px solid var(--color-ring); outline-offset: 4px; } .ds-theme-control:active { transform: scale(0.96); }"
+    },
+    {
+      "name": "Social Destination Link",
+      "kind": "chip",
+      "refersTo": "social-link",
+      "description": "A compact external-platform link with a brand icon and direct tonal hover feedback.",
+      "html": "<a class=\"ds-social-link\" href=\"https://example.com\"><svg class=\"ds-social-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-5.2 4.1c3.4 1 7 1 10.4 0M4.8 17.9c4.7-1.2 9.7-1.2 14.4 0\"/></svg><span>GitHub</span></a>",
+      "css": ".ds-social-link { min-height: 44px; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); color: var(--color-muted-foreground); font-family: var(--font-body); font-size: 0.9rem; font-weight: 650; text-decoration: none; transition: border-color 180ms cubic-bezier(0.22, 1, 0.36, 1), background-color 180ms cubic-bezier(0.22, 1, 0.36, 1), color 180ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-social-icon { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; } .ds-social-link:hover { border-color: var(--color-border-strong); background: var(--color-surface-strong); color: var(--color-foreground); } .ds-social-link:focus-visible { outline: 3px solid var(--color-ring); outline-offset: 4px; } .ds-social-link:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Project Card",
+      "kind": "card",
+      "refersTo": "project-card",
+      "description": "An equal compact destination card for the regular project grid.",
+      "html": "<a class=\"ds-project-card\" href=\"https://example.com\"><span class=\"ds-project-copy\"><strong>个人博客</strong><small>example.com</small></span><span class=\"ds-project-icon\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M14 3h7v7M10 14 21 3M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5\"/></svg></span></a>",
+      "css": ".ds-project-card { min-height: 96px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); color: var(--color-foreground); font-family: var(--font-body); text-decoration: none; transition: border-color 180ms cubic-bezier(0.22, 1, 0.36, 1), background-color 180ms cubic-bezier(0.22, 1, 0.36, 1), transform 180ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-project-copy { min-width: 0; display: grid; gap: 0.25rem; } .ds-project-copy strong { overflow-wrap: anywhere; font-family: var(--font-heading); font-size: 1.125rem; font-weight: 750; line-height: 1.25; letter-spacing: -0.02em; } .ds-project-copy small { overflow-wrap: anywhere; color: var(--color-muted-foreground); font-size: 0.78rem; } .ds-project-icon { width: 36px; height: 36px; flex: 0 0 36px; display: grid; place-items: center; border-radius: 6px; background: var(--color-surface-strong); color: var(--color-muted-foreground); transition: background-color 180ms cubic-bezier(0.22, 1, 0.36, 1), color 180ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-project-icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; } .ds-project-card:hover { border-color: var(--color-accent); background: var(--color-surface-strong); transform: translateY(-2px); } .ds-project-card:hover .ds-project-icon { background: var(--color-accent); color: var(--color-on-accent); } .ds-project-card:focus-visible { outline: 3px solid var(--color-ring); outline-offset: 4px; } .ds-project-card:active { transform: translateY(0); }"
+    },
+    {
+      "name": "Footer Quote",
+      "kind": "custom",
+      "description": "The restrained attribution quote that ends the page before the metadata row.",
+      "html": "<footer class=\"ds-footer\"><blockquote class=\"ds-footer-quote\">「UI参考了二叉树树，整个网站使用 DeepSeek 编写，部署在 Vercel 上。」</blockquote><div class=\"ds-footer-meta\">© 2026 残颜 · 保留所有权利</div></footer>",
+      "css": ".ds-footer { padding: 2rem 1rem; border-top: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-muted-foreground); font-family: var(--font-body); } .ds-footer-quote { max-width: 48rem; margin: 0; font-size: 0.9rem; line-height: 1.75; } .ds-footer-meta { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--color-border); font-size: 0.78rem; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Compact Personal Index",
+    "overview": "This is a concise personal hub that foregrounds a real identity and real destinations without turning either into a feature presentation. Pure white, carbon black, neutral grey, and rare amber create a quiet index: labels are direct, boundaries are explicit, and the visual system stays out of the way of the owner's candid voice.\n\nThe material is deliberately flat. Fine one-pixel borders and tonal hover fills establish hierarchy; there are no decorative shadows, gradient fields, or secondary visual stories. Light and dark themes preserve the same semantic roles while the single profile reveal and direct hover or active responses give the page enough life without continuous ornament.",
+    "keyCharacteristics": [
+      "Pure-white and carbon-black canvases with neutral-grey structure and rare amber cues.",
+      "Onest and Noto Sans SC form one compact, Chinese-readable type system.",
+      "Flat rounded controls and cards use one-pixel borders instead of elevation.",
+      "Theme-aware, reduced-motion-safe feedback is brief and directly tied to interaction."
+    ],
+    "rules": [
+      {
+        "name": "The Rare Amber Rule",
+        "body": "Use amber to mark a destination or immediate interaction state; neutral contrast carries every other hierarchy.",
+        "section": "colors"
+      },
+      {
+        "name": "The Semantic Theme Rule",
+        "body": "Switch the shared semantic roles as a set for dark mode; do not add a separate decorative palette.",
+        "section": "colors"
+      },
+      {
+        "name": "The Compact Hierarchy Rule",
+        "body": "Reserve the largest, tightest type for identity; section and project text must support scanning, not compete with it.",
+        "section": "typography"
+      },
+      {
+        "name": "The Regular Grid Rule",
+        "body": "Repeated destination cards keep equal grid treatment across viewport sizes; do not promote one card into a feature layout.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat Feedback Rule",
+        "body": "Depth comes from borders and tonal change; movement is reserved for direct interaction or the one-time profile entrance, never decorative lift.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** preserve the white/carbon/neutral-grey/amber semantic relationship in both themes.",
+      "**Do** use one-pixel borders and tonal hover fills before considering a new surface treatment.",
+      "**Do** keep interactive controls at least 44px high and retain the visible 3px focus outline.",
+      "**Do** use the installed Lucide and Simple Icons libraries, or inline SVG, for interface and brand icons.",
+      "**Do** keep motion to the single 360ms profile entrance and direct hover or active feedback, with the existing reduced-motion override intact."
+    ],
+    "donts": [
+      "**Don't** use blue-to-purple gradients.",
+      "**Don't** use emoji or emoticons as interface icons or decoration.",
+      "**Don't** introduce decorative shadows, oversized feature cards, or broad amber surfaces.",
+      "**Don't** turn the regular project grid into an asymmetrical showcase layout."
+    ]
+  }
+}

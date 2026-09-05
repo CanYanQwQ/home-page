@@ -1,138 +1,74 @@
 /* ============================================
-   个人主页 — 全局样式 & 设计 Token
-   设计系统: Motion-Driven × 极简单栏
-   配色: Monochrome + Warm Red Accent
-   字体: Space Grotesk (正文) + Archivo (标题)
+   个人主页 — 全局样式与设计 Token
    ============================================ */
 
-/* ---------- CSS 变量 (设计 Token) ---------- */
 :root {
-  /* 颜色 - 浅色模式 */
-  --color-primary: #18181b;
-  --color-on-primary: #ffffff;
-  --color-secondary: #3f3f46;
-  --color-accent: #dc2626;
-  --color-accent-soft: #fef2f2;
-  --color-accent-light: #fee2e2;
-  --color-background: #fafafa;
-  --color-foreground: #09090b;
-  --color-muted: #f1f5f9;
-  --color-muted-foreground: #71717a;
-  --color-border: #e4e4e7;
-  --color-card: #ffffff;
-  --color-card-hover: #f8fafc;
-  --color-ring: #18181b;
-  --color-destructive: #dc2626;
+  color-scheme: light;
 
-  /* 字体 */
-  --font-body: 'Space Grotesk', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  --font-heading: 'Archivo', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --color-background: #ffffff;
+  --color-foreground: #171717;
+  --color-muted-foreground: #4a4a4a;
+  --color-surface: #ffffff;
+  --color-surface-strong: #f5f5f5;
+  --color-border: #d4d4d4;
+  --color-border-strong: #737373;
+  --color-accent: #a85b00;
+  --color-accent-strong: #854800;
+  --color-on-accent: #ffffff;
+  --color-ring: #171717;
 
-  /* 字号 */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
+  --font-body: 'Onest', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-heading: 'Onest', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+
+  --text-xs: 0.78rem;
+  --text-sm: 0.9rem;
   --text-base: 1rem;
   --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 1.875rem;
-  --text-4xl: 2.25rem;
-  --text-5xl: 3rem;
 
-  /* 间距 */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
+  --space-5: 1.25rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
   --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
   --space-20: 5rem;
-  --space-24: 6rem;
 
-  /* 圆角 */
-  --radius-sm: 2px;
-  --radius-md: 6px;
-  --radius-lg: 10px;
-  --radius-xl: 14px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-xl: 24px;
   --radius-full: 999px;
 
-  /* 阴影 */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-glow: 0 0 20px rgb(37 99 235 / 0.15);
+  --transition-fast: 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-base: 280ms cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* 动画 */
-  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
-
-  /* 布局 */
-  --max-width: 720px;
-  --header-height: 3.5rem;
-}
-
-/* ---------- 暗色模式 ---------- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-primary: #fafafa;
-    --color-on-primary: #09090b;
-    --color-secondary: #a1a1aa;
-    --color-accent: #f87171;
-    --color-accent-soft: #2d1a1a;
-    --color-accent-light: #3d1f1f;
-    --color-background: #09090b;
-    --color-foreground: #fafafa;
-    --color-muted: #18181b;
-    --color-muted-foreground: #a1a1aa;
-    --color-border: #27272a;
-    --color-card: #18181b;
-    --color-card-hover: #1f1f23;
-    --color-ring: #fafafa;
-    --shadow-glow: 0 0 20px rgb(248 113 113 / 0.15);
-  }
+  --max-width: 1080px;
+  --header-height: 4.5rem;
 }
 
 [data-theme='dark'] {
-  --color-primary: #fafafa;
-  --color-on-primary: #09090b;
-  --color-secondary: #a1a1aa;
-  --color-accent: #f87171;
-  --color-accent-soft: #2d1a1a;
-  --color-accent-light: #3d1f1f;
-  --color-background: #09090b;
+  color-scheme: dark;
+
+  --color-background: #0a0a0a;
   --color-foreground: #fafafa;
-  --color-muted: #18181b;
-  --color-muted-foreground: #a1a1aa;
-  --color-border: #27272a;
-  --color-card: #18181b;
-  --color-card-hover: #1f1f23;
-  --color-ring: #fafafa;
-  --shadow-glow: 0 0 20px rgb(248 113 113 / 0.15);
+  --color-muted-foreground: #c7c7c7;
+  --color-surface: #141414;
+  --color-surface-strong: #262626;
+  --color-border: #404040;
+  --color-border-strong: #737373;
+  --color-accent: #f4b544;
+  --color-accent-strong: #ffd166;
+  --color-on-accent: #171717;
+  --color-ring: #f4b544;
 }
 
 [data-theme='light'] {
-  --color-primary: #18181b;
-  --color-on-primary: #ffffff;
-  --color-secondary: #3f3f46;
-  --color-accent: #dc2626;
-  --color-accent-soft: #fef2f2;
-  --color-accent-light: #fee2e2;
-  --color-background: #fafafa;
-  --color-foreground: #09090b;
-  --color-muted: #f1f5f9;
-  --color-muted-foreground: #71717a;
-  --color-border: #e4e4e7;
-  --color-card: #ffffff;
-  --color-card-hover: #f8fafc;
-  --color-ring: #18181b;
-  --shadow-glow: 0 0 20px rgb(220 38 38 / 0.15);
+  color-scheme: light;
 }
 
-/* ---------- 基础重置 ---------- */
 *,
 *::before,
 *::after {
@@ -143,59 +79,64 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--header-height);
+  scroll-padding-top: calc(var(--header-height) + var(--space-4));
   -webkit-text-size-adjust: 100%;
 }
 
 body {
-  font-family: var(--font-body);
-  font-size: var(--text-base);
-  line-height: 1.6;
-  color: var(--color-foreground);
-  background-color: var(--color-background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  min-width: 320px;
   min-height: 100dvh;
   overflow-x: hidden;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 a {
   color: inherit;
   text-decoration: none;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+  text-underline-offset: 0.2em;
 }
 
 button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
+  border: 0;
   background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
 }
 
-/* 文本选中：跟随红色主题点缀 */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 ::selection {
   background: var(--color-accent);
-  color: #fff;
+  color: var(--color-on-accent);
 }
 
-/* 键盘导航焦点样式 */
 :focus-visible {
-  outline: 2px solid var(--color-ring);
-  outline-offset: 2px;
+  outline: 3px solid var(--color-ring);
+  outline-offset: 4px;
 }
 
-/* ---------- 工具类 ---------- */
 .container {
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--space-6);
+  width: min(calc(100% - clamp(2rem, 6vw, 5rem)), var(--max-width));
+  margin-inline: auto;
 }
 
 .sr-only {
@@ -207,71 +148,34 @@ button {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
-  border-width: 0;
+  border: 0;
 }
 
-/* ---------- 动画关键帧 ---------- */
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+::-webkit-scrollbar-track {
+  background: var(--color-background);
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(-10px) scale(1.02);
-  }
+::-webkit-scrollbar-thumb {
+  border: 3px solid var(--color-background);
+  border-radius: var(--radius-full);
+  background: var(--color-border-strong);
 }
 
-@keyframes pulse-soft {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.6;
-    transform: scale(1.05);
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted-foreground);
 }
 
-/* ---------- 减轻动效 ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
+    scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  html {
-    scroll-behavior: auto;
-  }
-}
-
-/* ---------- 滚动条 ---------- */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: var(--radius-full);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-muted-foreground);
 }

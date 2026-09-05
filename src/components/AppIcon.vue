@@ -1,5 +1,4 @@
 <template>
-  <!-- 品牌图标（Simple Icons 官方图标） -->
   <svg
     v-if="brandIcon"
     :width="size"
@@ -7,46 +6,48 @@
     viewBox="0 0 24 24"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
-    role="img"
-    :aria-label="name"
+    aria-hidden="true"
+    focusable="false"
   >
     <path :d="brandIcon" />
   </svg>
 
-  <!-- 其他图标走 Lucide -->
-  <component v-else :is="iconComponent" :size="size" :stroke-width="1.75" v-bind="$attrs" />
+  <component
+    v-else
+    :is="iconComponent"
+    :size="size"
+    :stroke-width="1.8"
+    aria-hidden="true"
+    focusable="false"
+    v-bind="$attrs"
+  />
 </template>
 
 <script setup>
 import { computed } from 'vue'
 import {
-  Moon,
-  Sun,
-  ShieldCheck,
   ExternalLink,
-  X,
-  Menu,
+  Moon,
+  ShieldCheck,
+  Sun,
 } from 'lucide-vue-next'
 import {
-  siGithub,
   siBilibili,
+  siGithub,
   siGmail,
 } from 'simple-icons'
 
 const iconMap = {
-  'moon': Moon,
-  'sun': Sun,
+  moon: Moon,
+  sun: Sun,
   'shield-check': ShieldCheck,
   'external-link': ExternalLink,
-  'x': X,
-  'menu': Menu,
 }
 
-// 品牌图标使用 Simple Icons 官方 SVG path
 const brandIcons = {
-  'github': siGithub.path,
-  'bilibili': siBilibili.path,
-  'mail': siGmail.path,
+  github: siGithub.path,
+  bilibili: siBilibili.path,
+  mail: siGmail.path,
 }
 
 const props = defineProps({
@@ -54,11 +55,6 @@ const props = defineProps({
   size: { type: [Number, String], default: 24 },
 })
 
-const iconComponent = computed(() => {
-  return iconMap[props.name] || null
-})
-
-const brandIcon = computed(() => {
-  return brandIcons[props.name] || null
-})
+const iconComponent = computed(() => iconMap[props.name] || null)
+const brandIcon = computed(() => brandIcons[props.name] || null)
 </script>
