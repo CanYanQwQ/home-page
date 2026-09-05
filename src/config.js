@@ -14,14 +14,22 @@ export const siteConfig = {
 
   // ---------- SEO 配置（由 vite 插件自动注入 index.html） ----------
   // 部署后的站点地址（用于 canonical / Open Graph / 结构化数据）
-  siteUrl: 'https://example.com/',
+  siteUrl: 'https://zhouwanx.top/',
   seo: {
+    // 搜索结果与社交分享标题，不影响页面内的自嘲身份文案
+    title: '残颜的个人主页｜AI 与 Agent 编程、个人博客',
     // 页面描述（用于搜索引擎摘要与社交分享）
-    description: '残颜的个人主页 —— 无业游民，喜欢 IT 与 AI，主要使用 AGENT 编程。查看博客文章，关注 GitHub / 哔哩哔哩。',
+    description: '残颜的个人主页：无业游民一枚，喜欢 IT、AI 与 Agent 编程；这里提供个人博客、GitHub 与哔哩哔哩入口。',
     // 关键词（对 SEO 影响有限，供参考）
-    keywords: '残颜,个人主页,无业游民,IT,AI,AGENT编程,个人博客',
-    // 社交分享封面图：使用头像图片
-    image: '/avatar.jpg',
+    keywords: '残颜,残颜个人主页,AI,Agent编程,个人博客,GitHub,哔哩哔哩',
+    // 社交分享封面图
+    image: '/og-card.png',
+    imageAlt: '残颜的个人主页：AI 与 Agent 编程和个人博客',
+    imageWidth: 1200,
+    imageHeight: 630,
+    imageType: 'image/png',
+    // 结构化数据中的真实兴趣方向
+    knowsAbout: ['信息技术', '人工智能', 'Agent 编程'],
   },
   // 页面引言
   quote: '「UI参考了二叉树树，整个网站使用 DeepSeek 编写，部署在 Vercel 上。」',

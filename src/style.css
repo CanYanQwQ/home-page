@@ -139,6 +139,79 @@ img {
   margin-inline: auto;
 }
 
+/* 构建时注入的无 JavaScript 回退内容；Vue 挂载后会被正常页面替换。 */
+.seo-fallback {
+  width: min(calc(100% - clamp(2rem, 6vw, 5rem)), 920px);
+  min-height: 100dvh;
+  margin-inline: auto;
+  padding: clamp(3rem, 10vw, 7rem) 0;
+}
+
+.seo-fallback-profile {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 4.5rem);
+}
+
+.seo-fallback img,
+.seo-fallback-avatar {
+  width: 152px;
+  height: 152px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+}
+
+.seo-fallback img {
+  object-fit: cover;
+}
+
+.seo-fallback-avatar {
+  display: grid;
+  place-items: center;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.seo-fallback h1 {
+  font-size: clamp(3.75rem, 8vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.seo-fallback p {
+  max-width: 38rem;
+  margin-top: var(--space-4);
+  color: var(--color-muted-foreground);
+}
+
+.seo-fallback ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding: 0;
+  list-style: none;
+}
+
+.seo-fallback a {
+  text-decoration: underline;
+}
+
+.seo-fallback section + section {
+  margin-top: var(--space-16);
+  padding-top: var(--space-10);
+  border-top: 1px solid var(--color-border);
+}
+
+@media (max-width: 719px) {
+  .seo-fallback-profile {
+    grid-template-columns: 1fr;
+  }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
