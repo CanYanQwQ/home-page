@@ -47,6 +47,7 @@
 
   --max-width: 1080px;
   --header-height: 4.5rem;
+  --header-height-safe: calc(var(--header-height) + env(safe-area-inset-top));
 }
 
 [data-theme='dark'] {
@@ -87,6 +88,8 @@ body {
   min-width: 320px;
   min-height: 100dvh;
   overflow-x: hidden;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-body);
@@ -142,7 +145,6 @@ img {
 /* 构建时注入的无 JavaScript 回退内容；Vue 挂载后会被正常页面替换。 */
 .seo-fallback {
   width: min(calc(100% - clamp(2rem, 6vw, 5rem)), 920px);
-  min-height: 100dvh;
   margin-inline: auto;
   padding: clamp(3rem, 10vw, 7rem) 0;
 }
@@ -209,6 +211,46 @@ img {
 @media (max-width: 719px) {
   .seo-fallback-profile {
     grid-template-columns: 1fr;
+  }
+
+  .seo-fallback h1 {
+    font-size: clamp(3.5rem, 18vw, 4.75rem);
+  }
+}
+
+@media (max-width: 719px) and (max-height: 500px) {
+  .seo-fallback-profile {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .seo-fallback h1 {
+    font-size: clamp(2.5rem, 9vw, 3.25rem);
+  }
+}
+
+/* 悬停效果只对真正支持悬停的指针设备启用，避免触屏上的粘滞状态。 */
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    border-color: var(--color-accent);
+    background: var(--color-surface-strong);
+    transform: translateY(-2px);
+  }
+
+  .project-card:hover .project-icon {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+}
+
+@media (hover: none) {
+  .project-card:active {
+    border-color: var(--color-accent);
+    background: var(--color-surface-strong);
+  }
+
+  .project-card:active .project-icon {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
   }
 }
 

@@ -53,7 +53,8 @@ const initial = computed(() => props.name.trim().charAt(0).toUpperCase() || '?')
 }
 
 .nav-inner {
-  min-height: var(--header-height);
+  min-height: calc(var(--header-height) + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
   display: flex;
   align-items: center;
   justify-content: space-between;

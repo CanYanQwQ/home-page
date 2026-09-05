@@ -134,7 +134,7 @@ main {
 }
 
 .profile-section {
-  padding: calc(var(--header-height) + var(--space-16)) 0 var(--space-16);
+  padding: calc(var(--header-height-safe) + var(--space-16)) 0 var(--space-16);
 }
 
 .profile-layout {
@@ -241,7 +241,7 @@ main {
 
 @media (max-width: 719px) {
   .profile-section {
-    padding: calc(var(--header-height) + var(--space-10)) 0 var(--space-12);
+    padding: calc(var(--header-height-safe) + var(--space-10)) 0 var(--space-12);
   }
 
   .profile-layout {
@@ -273,6 +273,41 @@ main {
 
   .project-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* 矮横屏（手机横持）：保持并排简介并压缩垂直节奏，而不是沿用竖屏堆叠。 */
+@media (max-width: 719px) and (max-height: 500px) {
+  .profile-section {
+    padding: calc(var(--header-height-safe) + var(--space-6)) 0 var(--space-8);
+  }
+
+  .profile-layout {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-6);
+  }
+
+  .profile-avatar {
+    padding: var(--space-1);
+    border-radius: calc(var(--radius-xl) + var(--space-1));
+  }
+
+  .profile-copy h1 {
+    font-size: clamp(2.5rem, 9vw, 3.25rem);
+  }
+
+  .profile-role,
+  .profile-bio {
+    margin-top: var(--space-3);
+  }
+
+  .social-links {
+    display: flex;
+    margin-top: var(--space-4);
+  }
+
+  .project-section {
+    padding: var(--space-8) 0 var(--space-10);
   }
 }
 </style>

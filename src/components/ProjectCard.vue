@@ -46,16 +46,6 @@ const hostname = computed(() => new URL(props.project.url).hostname)
   transition: border-color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
 }
 
-.project-card:hover {
-  border-color: var(--color-accent);
-  background: var(--color-surface-strong);
-  transform: translateY(-2px);
-}
-
-.project-card:active {
-  transform: translateY(0);
-}
-
 .project-copy {
   min-width: 0;
   display: grid;
@@ -90,10 +80,5 @@ const hostname = computed(() => new URL(props.project.url).hostname)
   background: var(--color-surface-strong);
   color: var(--color-muted-foreground);
   transition: background-color var(--transition-fast), color var(--transition-fast);
-}
-
-.project-card:hover .project-icon {
-  background: var(--color-accent);
-  color: var(--color-on-accent);
 }
 </style>
